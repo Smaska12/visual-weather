@@ -3,6 +3,8 @@ const btnSearch = document.querySelector('.btn-search');
 
 const latitudeArea = document.querySelector('.latitude');
 const longitudeArea = document.querySelector('.longitude');
+const windSpeedArea = document.querySelector('.wind-speed');
+const humidityArea = document.querySelector('.humidity');
 const tempArea = document.querySelector('.temp');
 
 btnSearch.addEventListener('click', async () => {
@@ -51,22 +53,28 @@ async function getCurrentTemp(latitude, longitude) {
     const weatherData = await weather.json();
     const times = weatherData.hourly.time;
     const temps = weatherData.hourly.temperature_2m;
+    const windSpeed = weatherData.hourly.wind_speed_10m;
+    const humidity = weatherData.hourly.relative_humidity_2m;
 
     const timezone = weatherData.timezone;
     const currentDate = getCurrentDateInTimeZone(timezone);
 
     const index = times.indexOf(currentDate);
 
-    latitudeArea.textContent = `${latitude}°`;
-    longitudeArea.textContent = `${longitude}°`;
+    latitudeArea.textContent = `Широта: ${latitude}°`;
+    longitudeArea.textContent = `Долгота: ${longitude}°`;
 
     if (index !== -1) {
         const currentTemp = temps[index];
+        const currentWindSpeed = windSpeed[index];
+        const currentHumidity = humidity[index];
         const displayTime = new Date(times[index]).toLocaleTimeString('ru-RU', {
             hour: '2-digit',
             minute: '2-digit'
         });
-        tempArea.textContent = `${currentTemp}°C`;
+        tempArea.textContent = `Температура: ${currentTemp}°C`;
+        windSpeedArea.textContent = `Скорость ветра: ${currentWindSpeed}км/ч`;
+        humidityArea.textContent = `Влажность: ${currentHumidity}%`;
         console.log(`Сейчас ${displayTime} (по времени города) → ${currentTemp}°C`);
         return currentTemp;
     } else {

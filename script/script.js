@@ -7,6 +7,38 @@ const windSpeedArea = document.querySelector('.wind-speed');
 const humidityArea = document.querySelector('.humidity');
 const tempArea = document.querySelector('.temp');
 const dayStatusArea = document.querySelector('.day-status');
+const weatherCodeArea = document.querySelector('.weather-code');
+
+const weatherCodes = {
+    0: "Ясное небо",
+    1: "Преимущественно ясно",
+    2: "Переменная облачность",
+    3: "Пасмурно",
+    45: "Туман",
+    48: "Туман с изморозью",
+    51: "Морось: слабая",
+    53: "Морось: умеренная",
+    55: "Морось: сильная",
+    56: "Ледяная морось: слабая",
+    57: "Ледяная морось: сильная",
+    61: "Дождь: небольшой",
+    63: "Дождь: умеренный",
+    65: "Дождь: сильный",
+    66: "Ледяной дождь: слабый",
+    67: "Ледяной дождь: сильный",
+    71: "Снег: слабый",
+    73: "Снег: умеренный",
+    75: "Снег: сильный",
+    77: "Снежная крупа",
+    80: "Ливень: слабый",
+    81: "Ливень: умеренный",
+    82: "Ливень: сильный (гроза)",
+    85: "Снегопад: слабый",
+    86: "Снегопад: сильный",
+    95: "Гроза: слабая или умеренная",
+    96: "Гроза с градом: слабая",
+    99: "Гроза с градом: сильная"
+};
 
 btnSearch.addEventListener('click', async () => {
     let inputText = cityName.value.trim();
@@ -76,7 +108,7 @@ function getCurrentDateInTimeZone(timeZone) {
 async function getCurrentTemp(latitude, longitude) {
     try {
         const weather = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=auto`
+            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weathercode&timezone=auto`
         );
 
         if (!weather.ok) {
@@ -95,6 +127,7 @@ async function getCurrentTemp(latitude, longitude) {
         const temps = weatherData.hourly.temperature_2m;
         const windSpeed = weatherData.hourly.wind_speed_10m;
         const humidity = weatherData.hourly.relative_humidity_2m;
+        const weatherCode = weatherData.hourly.weathercode;
 
         const timezone = weatherData.timezone;
         const currentDate = getCurrentDateInTimeZone(timezone);
@@ -108,6 +141,8 @@ async function getCurrentTemp(latitude, longitude) {
             const currentTemp = temps[index];
             const currentWindSpeed = windSpeed[index];
             const currentHumidity = humidity[index];
+            const currentweatherCode = weatherCode[index];
+            const textByWeatherCode = getWeatherStatusByCode(currentweatherCode);
 
             const hour = parseInt(currentDate.slice(11, 13), 10);
             const timeOfDay = getTimeOfDay(hour);
@@ -120,8 +155,9 @@ async function getCurrentTemp(latitude, longitude) {
             windSpeedArea.textContent = `Скорость ветра: ${currentWindSpeed}км/ч`;
             humidityArea.textContent = `Влажность: ${currentHumidity}%`;
             dayStatusArea.textContent = `Статус дня: ${timeOfDay}`;
+            weatherCodeArea.textContent = `Состояние: ${textByWeatherCode}`;
 
-            console.log(`Сейчас ${displayTime} (по времени города) → ${currentTemp}°C`);
+            // console.log(`Сейчас ${displayTime} (по времени города) → ${currentTemp}°C`);
             return currentTemp;
         } else {
             console.log('Данных для текущего часа нет');
@@ -140,4 +176,8 @@ function getTimeOfDay(hour) {
     if (hour >= 12 & hour < 18) return 'День';
     if (hour >= 18 & hour < 24) return 'Вечер';
     return 'Ночь';
+}
+
+function getWeatherStatusByCode(weathercode) {
+    return weatherCodes[weathercode] || 'Незивестный код погоды';
 }

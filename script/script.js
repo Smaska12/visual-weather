@@ -6,6 +6,7 @@ const longitudeArea = document.querySelector('.longitude');
 const windSpeedArea = document.querySelector('.wind-speed');
 const humidityArea = document.querySelector('.humidity');
 const tempArea = document.querySelector('.temp');
+const dayStatusArea = document.querySelector('.day-status');
 
 btnSearch.addEventListener('click', async () => {
     let inputText = cityName.value;
@@ -68,6 +69,10 @@ async function getCurrentTemp(latitude, longitude) {
         const currentTemp = temps[index];
         const currentWindSpeed = windSpeed[index];
         const currentHumidity = humidity[index];
+
+        const hour = parseInt(currentDate.slice(11, 13), 10);
+        const timeOfDay = getTimeOfDay(hour);
+
         const displayTime = new Date(times[index]).toLocaleTimeString('ru-RU', {
             hour: '2-digit',
             minute: '2-digit'
@@ -75,6 +80,7 @@ async function getCurrentTemp(latitude, longitude) {
         tempArea.textContent = `Температура: ${currentTemp}°C`;
         windSpeedArea.textContent = `Скорость ветра: ${currentWindSpeed}км/ч`;
         humidityArea.textContent = `Влажность: ${currentHumidity}%`;
+        dayStatusArea.textContent = `Статус дня: ${timeOfDay}`;
         console.log(`Сейчас ${displayTime} (по времени города) → ${currentTemp}°C`);
         return currentTemp;
     } else {
@@ -82,4 +88,11 @@ async function getCurrentTemp(latitude, longitude) {
         tempArea.textContent = 'Нет данных';
         return null;
     }
+}
+
+function getTimeOfDay(hour) {
+    if (hour >= 6 & hour < 12) return 'Утро';
+    if (hour >= 12 & hour < 18) return 'День';
+    if (hour >= 18 & hour < 24) return 'Вечер';
+    return 'Ночь';
 }

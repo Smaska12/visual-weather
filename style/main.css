@@ -1,31 +1,72 @@
+body {
+    background-color: rgb(76, 81, 131);
+}
+
+* {
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 600;
+}
+
 .search-bar {
+    display: flex;
+    height: 30px;
+    gap: 10px;
     position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, 0%);
+    text-align: center;
+    padding: 8px 12px;
+    overflow: hidden;
+    margin: 20px;
+    background: #1a1a2e;
+    border: 1px solid rgba(176, 156, 217, 1.0);
+    border-radius: 50px;
+    top: 0; 
+    right: 0; 
 }
 
 .city-name {
-    width: 300px; 
-    height: 50px; 
-    font-size: 30px; 
-    text-align: center;
-    border: 2px solid black; 
-    border-radius: 10px; 
+    position: relative;
+    width: 300px;
+    font-size: 18px;
+    border: none;
+    background: transparent;
+    color: #fff;
+    padding-left: 8px;
+}
+
+.city-name::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.city-name:focus {
+    outline: none;
 }
 
 .btn-search {
-    padding: 10px 10px;
-    font-size: 30px; 
-    background: rgba(243, 255, 156, 0.3);
-    border: 2px solid black; 
-    border-radius: 10px;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+    align-items: center;
+    padding: 0px 20px;
+    font-size: 20px; 
+    background: rgba(176, 156, 217, 1.0);
+    border: none;
     cursor: pointer;
-    transition: background 0.5s;
+    flex-shrink: 0;
+    transition: background 0.3s;
+}
+
+.btn-search svg {
+    fill: #fff;
 }
 
 .btn-search:hover {
-    background: rgba(242, 255, 141, 0.8);
+    background: rgba(176, 156, 217, 0.7);
+}
+
+.search-result-bar {
+    position: absolute;
+    top: 50%;
 }
 
 .search-result-bar li{

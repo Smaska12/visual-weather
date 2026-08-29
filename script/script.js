@@ -3,12 +3,12 @@ const btnSearch = document.querySelector('.btn-search');
 
 // const latitudeArea = document.querySelector('.latitude');
 // const longitudeArea = document.querySelector('.longitude');
-const windSpeedArea = document.querySelector('.wind-speed');
-const humidityArea = document.querySelector('.humidity');
-const tempArea = document.querySelector('.temp');
-const dayStatusArea = document.querySelector('.day-status');
-const weatherCodeArea = document.querySelector('.weather-code');
-const cityNameArea = document.querySelector('.city');
+const cityNameArea = document.querySelector('.city .value');
+const windSpeedArea = document.querySelector('.wind-speed .value');
+const humidityArea = document.querySelector('.humidity .value');
+const tempArea = document.querySelector('.temp .value');
+const dayStatusArea = document.querySelector('.day-status .value');
+const weatherCodeArea = document.querySelector('.weather-code .value');
 
 const weatherCodes = {
     0: "Ясное небо",

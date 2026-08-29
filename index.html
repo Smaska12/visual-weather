@@ -10,26 +10,33 @@
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 </head>
 <body>
-    <label class="search-bar">
-        <input type="text" class="city-name" value="" placeholder="Search city...">
-        <button class="btn-search" type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30">
-                <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
-            </svg>
-        </button>
-    </label>
-    
-    <div class="search-result-bar">
-        <ul>
-            <li class="latitude" data-name="latitude">1</li>
-            <li class="longitude" data-name="longitude">2</li>
-            <li class="wind-speed" data-name="wind-speed">3</li>
-            <li class="humidity" data-name="humidity">4</li>
-            <li class="temp" data-name="temp">5</li>
-            <li class="day-status" data-name="day-status">6</li>
-            <li class="weather-code" data-name="weather-code">8</li>
-        </ul>
+    <div class="main-card">
+        <label class="search-bar">
+            <input type="text" class="city-name" value="Москва" placeholder="Search city...">
+            <button class="btn-search" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30">
+                    <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
+                </svg>
+            </button>
+        </label>
+        
+        <div class="bg-area">
+            <div class="search-result-bar">
+                <ul class="list-info">
+                    <!-- <li class="latitude" data-name="latitude"></li>
+                    <li class="longitude" data-name="longitude"></li> -->
+                    <li class="city" data-name="city">Город</li>
+                    <li class="wind-speed" data-name="wind-speed">Скорость ветра</li>
+                    <li class="humidity" data-name="humidity">Влажность</li>
+                    <li class="temp" data-name="temp">Температура</li>
+                    <li class="day-status" data-name="day-status">Время суток</li>
+                    <li class="weather-code" data-name="weather-code">Осадки</li>
+                </ul>
+            </div>
+        </div>
+        
     </div>
+    
     
     <script src="script/script.js"></script>
 </body>

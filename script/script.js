@@ -1,13 +1,14 @@
 const cityName = document.querySelector('.city-name');
 const btnSearch = document.querySelector('.btn-search');
 
-const latitudeArea = document.querySelector('.latitude');
-const longitudeArea = document.querySelector('.longitude');
+// const latitudeArea = document.querySelector('.latitude');
+// const longitudeArea = document.querySelector('.longitude');
 const windSpeedArea = document.querySelector('.wind-speed');
 const humidityArea = document.querySelector('.humidity');
 const tempArea = document.querySelector('.temp');
 const dayStatusArea = document.querySelector('.day-status');
 const weatherCodeArea = document.querySelector('.weather-code');
+const cityNameArea = document.querySelector('.city');
 
 const weatherCodes = {
     0: "Ясное небо",
@@ -69,7 +70,8 @@ btnSearch.addEventListener('click', async () => {
         const latitude = firstResult.latitude;
         const longitude = firstResult.longitude;
 
-        getCurrentTemp(latitude, longitude);
+        await getCurrentTemp(latitude, longitude);
+        cityNameArea.textContent = `Город: ${inputText}`;
     } catch (error) {
         console.log('Ошибка запроса', error);
         showError('Не удалось получить данные. Проверьте подключение к интернету');
@@ -78,10 +80,12 @@ btnSearch.addEventListener('click', async () => {
 
 function showError(message) {
     tempArea.textContent = message;
-    latitudeArea.textContent = '';
-    longitudeArea.textContent = '';
+    // latitudeArea.textContent = '';
+    // longitudeArea.textContent = '';
     windSpeedArea.textContent = '';
     humidityArea.textContent = '';
+    dayStatusArea.textContent = '';
+    weatherCodeArea.textContent = '';
 }
 
 function getCurrentDateInTimeZone(timeZone) {
@@ -134,8 +138,8 @@ async function getCurrentTemp(latitude, longitude) {
 
         const index = times.indexOf(currentDate);
 
-        latitudeArea.textContent = `Широта: ${latitude}°`;
-        longitudeArea.textContent = `Долгота: ${longitude}°`;
+        // latitudeArea.textContent = `Широта: ${latitude}°`;
+        // longitudeArea.textContent = `Долгота: ${longitude}°`;
 
         if (index !== -1) {
             const currentTemp = temps[index];
@@ -147,15 +151,15 @@ async function getCurrentTemp(latitude, longitude) {
             const hour = parseInt(currentDate.slice(11, 13), 10);
             const timeOfDay = getTimeOfDay(hour);
 
-            const displayTime = new Date(times[index]).toLocaleTimeString('ru-RU', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            tempArea.textContent = `Температура: ${currentTemp}°C`;
-            windSpeedArea.textContent = `Скорость ветра: ${currentWindSpeed}км/ч`;
-            humidityArea.textContent = `Влажность: ${currentHumidity}%`;
-            dayStatusArea.textContent = `Статус дня: ${timeOfDay}`;
-            weatherCodeArea.textContent = `Состояние: ${textByWeatherCode}`;
+            // const displayTime = new Date(times[index]).toLocaleTimeString('ru-RU', {
+            //     hour: '2-digit',
+            //     minute: '2-digit'
+            // });
+            tempArea.textContent = `${currentTemp}°C`;
+            windSpeedArea.textContent = `${currentWindSpeed}км/ч`;
+            humidityArea.textContent = `${currentHumidity}%`;
+            dayStatusArea.textContent = `${timeOfDay}`;
+            weatherCodeArea.textContent = `${textByWeatherCode}`;
 
             // console.log(`Сейчас ${displayTime} (по времени города) → ${currentTemp}°C`);
             return currentTemp;

@@ -87,12 +87,13 @@ body {
     top: 0;
     height: 100%;
     width: 50%;
-    background: linear-gradient(to right, #07072b 10%, transparent 99%);
+    background: linear-gradient(to right, #07072b 30%, transparent 100%);
     z-index: 1;
 }
 
 .search-result-bar {
     position: absolute;
+    width: 100%;
     height: 100%;
     left: 0;
     top: 0;
@@ -102,6 +103,9 @@ body {
 .list-info {
     position: absolute;
     top: 50%;
+    left: 0;
+    width: 50%;
+    height: 50%;
     transform: translate(0px, -50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -109,12 +113,11 @@ body {
         "city day"
         "date date"
         "temp temp"
-        "temp temp"
         "weather weather"
         "wind humidity";
     gap: 20px;
-    height: 50%;
     list-style-type: none;
+    padding: 0 40px;
 }
 
 .list-info li {
@@ -125,7 +128,7 @@ body {
 }
 
 .city { grid-area: city; font-size: 24px; }
-.date { grid-area: date; font-size: 24px; margin-left: 70px; }
+.date { grid-area: date; font-size: 24px; margin-left: 75px; color: rgba(176, 156, 217, 0.6) !important;  }
 .temp span { grid-area: temp; font-size: 64px; }
 .temp p { 
     font-size: 32px;
@@ -140,9 +143,9 @@ body {
     flex-shrink: 0;
     stroke: rgba(176, 156, 217, 1.0);
 }
-.list-info li:nth-child(2) svg { stroke: rgba(68, 255, 134, 0.5); }
-.list-info li:nth-child(3) svg { stroke: rgba(68, 215, 255, 0.5); }
-.list-info li:nth-child(4) svg { stroke: rgba(255, 68, 68, 0.5); }
+.list-info li:nth-child(3) svg { stroke: rgba(68, 255, 134, 0.5); }
+.list-info li:nth-child(4) svg { stroke: rgba(68, 215, 255, 0.5); }
+.list-info li:nth-child(5) svg { stroke: rgba(255, 68, 68, 0.5); }
 
 .content {
     opacity: 0;

@@ -159,14 +159,11 @@ async function getCurrentTemp(latitude, longitude) {
             const timeOfDay = getTimeOfDay(hour);
 
             const displayTime = new Date(times[index]).toLocaleTimeString('ru-RU', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
                 hour: '2-digit',
                 minute: '2-digit'
             });
             tempArea.textContent = `${currentTemp}`;
-            dateArea.textContent = `${displayTime}`;
+            dateArea.textContent = `${getRealCurrentTime(timezone)} (Обновлено в ${displayTime})`;
             windSpeedArea.textContent = `${currentWindSpeed.toFixed(2)} м/с`;
             humidityArea.textContent = `${currentHumidity} %`;
             dayStatusArea.textContent = `${timeOfDay}`;
@@ -199,6 +196,15 @@ function getWeatherStatusByCode(weathercode) {
 
 function meterPerKilometer(windspeed) {
     return windspeed / 3.6;
+}
+
+function getRealCurrentTime(timeZone) {
+    const now = new Date();
+    return now.toLocaleDateString('ru-RU', {
+        timeZone,
+        hour: '2-digit',
+        minute: '2-digit'
+    });
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

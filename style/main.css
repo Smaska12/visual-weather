@@ -107,7 +107,7 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
         "city day"
-        "city day"
+        "date date"
         "temp temp"
         "temp temp"
         "weather weather"
@@ -125,6 +125,7 @@ body {
 }
 
 .city { grid-area: city; font-size: 24px; }
+.date { grid-area: date; font-size: 24px; margin-left: 70px; }
 .temp span { grid-area: temp; font-size: 64px; }
 .temp p { 
     font-size: 32px;

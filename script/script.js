@@ -4,6 +4,7 @@ const btnSearch = document.querySelector('.btn-search');
 // const latitudeArea = document.querySelector('.latitude');
 // const longitudeArea = document.querySelector('.longitude');
 const cityNameArea = document.querySelector('.city .value');
+const dateArea = document.querySelector('.date .value');
 const windSpeedArea = document.querySelector('.wind-speed .value');
 const humidityArea = document.querySelector('.humidity .value');
 const tempArea = document.querySelector('.temp .value');
@@ -82,6 +83,8 @@ function showError(message) {
     tempArea.textContent = message;
     // latitudeArea.textContent = '';
     // longitudeArea.textContent = '';
+    cityNameArea.textContent = '';
+    dateArea.textContent = '';
     windSpeedArea.textContent = '';
     humidityArea.textContent = '';
     dayStatusArea.textContent = '';
@@ -152,10 +155,14 @@ async function getCurrentTemp(latitude, longitude) {
             const timeOfDay = getTimeOfDay(hour);
 
             const displayTime = new Date(times[index]).toLocaleTimeString('ru-RU', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
                 hour: '2-digit',
                 minute: '2-digit'
             });
             tempArea.textContent = `${currentTemp}`;
+            dateArea.textContent = `${displayTime}`;
             windSpeedArea.textContent = `${currentWindSpeed.toFixed(2)} м/с`;
             humidityArea.textContent = `${currentHumidity} %`;
             dayStatusArea.textContent = `${timeOfDay}`;

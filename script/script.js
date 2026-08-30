@@ -207,5 +207,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await searchCity('Москва');
 
+    loader.classList.add('hidden');
     content.classList.add('loaded');
 });

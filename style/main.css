@@ -151,3 +151,32 @@ body {
 .content.loaded {
     opacity: 1;
 }
+
+.loader {
+    position: absolute;
+    display: flex;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    background: #0d0d1f;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+}
+
+.loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(176, 156, 217, 0.2);
+    border-top-color: rgba(176, 156, 217, 1);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

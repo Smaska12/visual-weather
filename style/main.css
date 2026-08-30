@@ -25,7 +25,7 @@ body {
 
 .search-bar {
     display: flex;
-    height: 30px;
+    height: 50px;
     gap: 10px;
     position: absolute; 
     text-align: center;
@@ -38,11 +38,12 @@ body {
     top: 0; 
     right: 0;
     cursor: text; 
+    transition: border 0.3s;
 }
 
 .city-name {
     position: relative;
-    width: 300px;
+    width: 400px;
     font-size: 18px;
     border: none;
     background: transparent;
@@ -64,7 +65,7 @@ body {
     top: 0;
     right: 0;
     align-items: center;
-    padding: 0px 20px;
+    padding: 0px 30px;
     font-size: 20px; 
     background: rgba(176, 156, 217, 1.0);
     border: none;
@@ -81,13 +82,17 @@ body {
     background: rgba(176, 156, 217, 0.7);
 }
 
+.search-bar:has(.btn-search:hover) {
+    border-color: rgba(176, 156, 217, 0.7);
+}
+
 .bg-area {
     position: absolute;
     left: 0;
     top: 0;
     height: 100%;
     width: 50%;
-    background: linear-gradient(to right, #07072b 30%, transparent 100%);
+    background: linear-gradient(to right, #07072b 5%, #07072bae 50%, transparent 100%);
     z-index: 1;
 }
 

@@ -143,7 +143,7 @@ async function getCurrentTemp(latitude, longitude) {
 
         if (index !== -1) {
             const currentTemp = temps[index];
-            const currentWindSpeed = windSpeed[index];
+            const currentWindSpeed = meterPerKilometer(windSpeed[index]);
             const currentHumidity = humidity[index];
             const currentweatherCode = weatherCode[index];
             const textByWeatherCode = getWeatherStatusByCode(currentweatherCode);
@@ -151,17 +151,17 @@ async function getCurrentTemp(latitude, longitude) {
             const hour = parseInt(currentDate.slice(11, 13), 10);
             const timeOfDay = getTimeOfDay(hour);
 
-            // const displayTime = new Date(times[index]).toLocaleTimeString('ru-RU', {
-            //     hour: '2-digit',
-            //     minute: '2-digit'
-            // });
+            const displayTime = new Date(times[index]).toLocaleTimeString('ru-RU', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
             tempArea.textContent = `${currentTemp}`;
-            windSpeedArea.textContent = `${currentWindSpeed}км/ч`;
-            humidityArea.textContent = `${currentHumidity}%`;
+            windSpeedArea.textContent = `${currentWindSpeed.toFixed(2)} м/с`;
+            humidityArea.textContent = `${currentHumidity} %`;
             dayStatusArea.textContent = `${timeOfDay}`;
             weatherCodeArea.textContent = `${textByWeatherCode}`;
 
-            // console.log(`Сейчас ${displayTime} (по времени города) → ${currentTemp}°C`);
+            console.log(`Сейчас ${displayTime} (по времени города) → ${currentTemp}°C`);
             return currentTemp;
         } else {
             console.log('Данных для текущего часа нет');
@@ -184,4 +184,8 @@ function getTimeOfDay(hour) {
 
 function getWeatherStatusByCode(weathercode) {
     return weatherCodes[weathercode] || 'Незивестный код погоды';
+}
+
+function meterPerKilometer(windspeed) {
+    return windspeed / 3.6;
 }

@@ -100,14 +100,20 @@ body {
 }
 
 .list-info {
+    position: absolute;
+    top: 50%;
+    transform: translate(0px, -50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
         "city day"
+        "city day"
+        "temp temp"
         "temp temp"
         "weather weather"
         "wind humidity";
     gap: 20px;
+    height: 50%;
     list-style-type: none;
 }
 
@@ -123,7 +129,6 @@ body {
 .temp p { 
     font-size: 32px;
     align-self: flex-start;
-    margin-top: 12px;
 }
 .weather-code { grid-area: weather; font-size: 32px; }
 .wind-speed { grid-area: wind; font-size: 20px; }

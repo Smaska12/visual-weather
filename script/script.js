@@ -42,8 +42,8 @@ const weatherCodes = {
     99: "Гроза с градом: сильная"
 };
 
-btnSearch.addEventListener('click', async () => {
-    let inputText = cityName.value.trim();
+async function searchCity(inputText) {
+    inputText = inputText.trim();
 
     if (!inputText) {
         showError("Введите название города");
@@ -77,6 +77,10 @@ btnSearch.addEventListener('click', async () => {
         console.log('Ошибка запроса', error);
         showError('Не удалось получить данные. Проверьте подключение к интернету');
     }
+}
+
+btnSearch.addEventListener('click', () => {
+    searchCity(cityName.value);
 })
 
 function showError(message) {
@@ -183,9 +187,9 @@ async function getCurrentTemp(latitude, longitude) {
 }
 
 function getTimeOfDay(hour) {
-    if (hour >= 6 & hour < 12) return 'Утро';
-    if (hour >= 12 & hour < 18) return 'День';
-    if (hour >= 18 & hour < 24) return 'Вечер';
+    if (hour >= 6 && hour < 12) return 'Утро';
+    if (hour >= 12 && hour < 18) return 'День';
+    if (hour >= 18 && hour < 24) return 'Вечер';
     return 'Ночь';
 }
 
@@ -196,3 +200,12 @@ function getWeatherStatusByCode(weathercode) {
 function meterPerKilometer(windspeed) {
     return windspeed / 3.6;
 }
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const loader = document.getElementById('loader');
+    const content = document.getElementById('content');
+
+    await searchCity('Москва');
+
+    content.classList.add('loaded');
+});

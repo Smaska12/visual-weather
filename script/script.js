@@ -71,7 +71,7 @@ btnSearch.addEventListener('click', async () => {
         const longitude = firstResult.longitude;
 
         await getCurrentTemp(latitude, longitude);
-        cityNameArea.textContent = `Город: ${inputText}`;
+        cityNameArea.textContent = `${inputText}`;
     } catch (error) {
         console.log('Ошибка запроса', error);
         showError('Не удалось получить данные. Проверьте подключение к интернету');
@@ -155,7 +155,7 @@ async function getCurrentTemp(latitude, longitude) {
             //     hour: '2-digit',
             //     minute: '2-digit'
             // });
-            tempArea.textContent = `${currentTemp}°C`;
+            tempArea.textContent = `${currentTemp}`;
             windSpeedArea.textContent = `${currentWindSpeed}км/ч`;
             humidityArea.textContent = `${currentHumidity}%`;
             dayStatusArea.textContent = `${timeOfDay}`;

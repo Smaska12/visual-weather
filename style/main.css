@@ -119,3 +119,10 @@ body {
     flex-shrink: 0;
     stroke: rgba(176, 156, 217, 1.0);
 }
+
+.list-info li:nth-child(1) svg { 
+    stroke: relative;
+}
+.list-info li:nth-child(2) svg { stroke: rgba(68, 255, 134, 0.5); }
+.list-info li:nth-child(3) svg { stroke: rgba(68, 215, 255, 0.5); }
+.list-info li:nth-child(4) svg { stroke: rgba(255, 68, 68, 0.5); }

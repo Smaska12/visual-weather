@@ -280,3 +280,6 @@ body[data-time="night"] .day-status svg {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+
+

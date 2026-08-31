@@ -155,6 +155,8 @@ async function getCurrentTemp(latitude, longitude) {
             const currentweatherCode = weatherCode[index];
             const textByWeatherCode = getWeatherStatusByCode(currentweatherCode);
 
+            initRain(currentweatherCode);
+
             const hour = parseInt(currentDate.slice(11, 13), 10);
             const timeOfDay = getTimeOfDay(hour);
 

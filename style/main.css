@@ -92,9 +92,68 @@ body {
     left: 0;
     top: 0;
     height: 100%;
-    width: 50%;
-    background: linear-gradient(to right, #07072b 5%, #07072bae 50%, transparent 100%);
+    width: 60%;
+    background: var(--bg-gradient, linear-gradient(to right, #07072b 0%, rgba(7, 7, 43, 0.8) 30%, rgba(7, 7, 43, 0.3) 60%, transparent 100%));
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    
+    mask-image: linear-gradient(
+        to right,
+        black 0%,
+        black 35%,
+        transparent 70%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        black 0%,
+        black 35%,
+        transparent 70%,
+        transparent 100%
+    );
+    
+    border-right: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 
+        12px 0 40px rgba(0, 0, 0, 0.4),
+        inset -30px 0 60px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-time="morning"] .bg-area {
+    --bg-gradient: linear-gradient(to right, 
+        rgba(26, 10, 46, 0.95) 0%, 
+        rgba(45, 27, 105, 0.7) 30%, 
+        rgba(74, 44, 138, 0.3) 60%, 
+        transparent 100%
+    );
+}
+
+[data-time="day"] .bg-area {
+    --bg-gradient: linear-gradient(to right, 
+        rgba(12, 20, 69, 0.95) 0%, 
+        rgba(26, 42, 106, 0.7) 30%, 
+        rgba(42, 74, 138, 0.3) 60%, 
+        transparent 100%
+    );
+}
+
+[data-time="evening"] .bg-area {
+    --bg-gradient: linear-gradient(to right, 
+        rgba(45, 10, 10, 0.95) 0%, 
+        rgba(74, 26, 26, 0.7) 30%, 
+        rgba(106, 42, 26, 0.3) 60%, 
+        transparent 100%
+    );
+}
+
+[data-time="night"] .bg-area {
+    --bg-gradient: linear-gradient(to right, 
+        rgba(2, 2, 16, 0.95) 0%, 
+        rgba(7, 7, 43, 0.7) 30%, 
+        rgba(10, 10, 62, 0.3) 60%, 
+        transparent 100%
+    );
 }
 
 .search-result-bar {

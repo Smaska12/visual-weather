@@ -184,22 +184,24 @@ async function getCurrentTemp(latitude, longitude) {
 }
 
 function getTimeOfDay(hour) {
-    const dayStatus = document.querySelector('.day-status');
-
     if (hour >= 6 && hour < 12) {
-        dayStatus.setAttribute('data-time', 'morning');
+        applyTimeOfDayTheme('morning');
         return 'Утро';
-    } 
+    }
     if (hour >= 12 && hour < 18) {
-        dayStatus.setAttribute('data-time', 'day');
-        return 'День';
-    } 
+        applyTimeOfDayTheme('day'); 
+        return 'День'; 
+    }
     if (hour >= 18 && hour < 24) {
-        dayStatus.setAttribute('data-time', 'evening');
+        applyTimeOfDayTheme('evening');
         return 'Вечер';
     } 
-    dayStatus.setAttribute('data-time', 'night');
+    applyTimeOfDayTheme('night');
     return 'Ночь';
+}
+
+function applyTimeOfDayTheme(timeKey) {
+    document.body.setAttribute('data-time', timeKey);
 }
 
 function getWeatherStatusByCode(weathercode) {

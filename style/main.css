@@ -153,17 +153,32 @@ body {
 .list-info li:nth-child(4) svg { stroke: rgba(68, 215, 255, 0.5); }
 .list-info li:nth-child(5) svg { stroke: rgba(255, 68, 68, 0.5); }
 
-.day-status[data-time="morning"] svg {
-    stroke: rgba(255, 255, 68, 0.5);
+body[data-time="morning"] {
+    background-color: rgba(120, 90, 70, 0.35);
 }
-.day-status[data-time="day"] svg {
-    stroke: rgba(255, 200, 0, 0.8);
+body[data-time="morning"] .day-status svg {
+    stroke: rgba(210, 160, 120, 0.9);
 }
-.day-status[data-time="evening"] svg {
-    stroke: rgba(255, 150, 0, 0.7);
+
+body[data-time="day"] {
+    background-color: rgba(60, 90, 110, 0.35);
 }
-.day-status[data-time="night"] svg {
-    stroke: rgba(100, 100, 255, 0.5);
+body[data-time="day"] .day-status svg {
+    stroke: rgba(140, 180, 200, 0.9);
+}
+
+body[data-time="evening"] {
+    background-color: rgba(110, 60, 70, 0.35);
+}
+body[data-time="evening"] .day-status svg {
+    stroke: rgba(200, 120, 130, 0.9);
+}
+
+body[data-time="night"] {
+    background-color: rgba(45, 45, 80, 0.4);
+}
+body[data-time="night"] .day-status svg {
+    stroke: rgba(150, 150, 210, 0.9);
 }
 
 .content {

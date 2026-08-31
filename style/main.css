@@ -153,6 +153,19 @@ body {
 .list-info li:nth-child(4) svg { stroke: rgba(68, 215, 255, 0.5); }
 .list-info li:nth-child(5) svg { stroke: rgba(255, 68, 68, 0.5); }
 
+.day-status[data-time="morning"] svg {
+    stroke: rgba(255, 255, 68, 0.5);
+}
+.day-status[data-time="day"] svg {
+    stroke: rgba(255, 200, 0, 0.8);
+}
+.day-status[data-time="evening"] svg {
+    stroke: rgba(255, 150, 0, 0.7);
+}
+.day-status[data-time="night"] svg {
+    stroke: rgba(100, 100, 255, 0.5);
+}
+
 .content {
     opacity: 0;
 }

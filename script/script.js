@@ -184,9 +184,21 @@ async function getCurrentTemp(latitude, longitude) {
 }
 
 function getTimeOfDay(hour) {
-    if (hour >= 6 && hour < 12) return 'Утро';
-    if (hour >= 12 && hour < 18) return 'День';
-    if (hour >= 18 && hour < 24) return 'Вечер';
+    const dayStatus = document.querySelector('.day-status');
+
+    if (hour >= 6 && hour < 12) {
+        dayStatus.setAttribute('data-time', 'morning');
+        return 'Утро';
+    } 
+    if (hour >= 12 && hour < 18) {
+        dayStatus.setAttribute('data-time', 'day');
+        return 'День';
+    } 
+    if (hour >= 18 && hour < 24) {
+        dayStatus.setAttribute('data-time', 'evening');
+        return 'Вечер';
+    } 
+    dayStatus.setAttribute('data-time', 'night');
     return 'Ночь';
 }
 

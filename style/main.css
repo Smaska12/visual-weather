@@ -2,6 +2,7 @@ body {
     background-color: rgb(76, 81, 131);
     overflow: hidden;
     margin: 0;
+    transition: 0.3s ease;
 }
 
 .main-card {
@@ -113,14 +114,16 @@ body {
     height: calc(100% - 50px);
     transform: translate(0px, -50%);
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 0.1fr 0.1fr 0.3fr 0.1fr 0.1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0fr 0fr 0.3fr 0.1fr 0.1fr 0.1fr 0.1fr;
     grid-template-areas:
-        "city day"
-        "date date"
-        "temp temp"
-        "weather weather"
-        "wind humidity";
+        "city"
+        "date"
+        "temp"
+        "day"
+        "weather"
+        "wind"
+        "humidity";
     list-style-type: none;
     padding: 0 40px;
 }
@@ -133,6 +136,7 @@ body {
 }
 
 .city { grid-area: city; font-size: 24px; }
+.city span { grid-area: city; font-size: 48px; }
 .date { grid-area: date; font-size: 24px; margin-left: 75px; color: rgba(176, 156, 217, 0.6) !important;  }
 .temp span { grid-area: temp; font-size: 128px; }
 .temp p { 

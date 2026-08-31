@@ -216,3 +216,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     loader.classList.add('hidden');
     content.classList.add('loaded');
 });
+
+btnSearch.addEventListener('click', async () => {
+    const loader = document.getElementById('loader');
+    const content = document.getElementById('content');
+
+    loader.classList.remove('hidden');
+    content.classList.remove('loaded');
+
+    await searchCity(cityName.value);
+
+    loader.classList.add('hidden');
+    content.classList.add('loaded');
+})

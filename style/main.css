@@ -110,17 +110,17 @@ body {
     top: 50%;
     left: 0;
     width: 50%;
-    height: 50%;
+    height: calc(100% - 50px);
     transform: translate(0px, -50%);
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.1fr 0.1fr 0.3fr 0.1fr 0.1fr;
     grid-template-areas:
         "city day"
         "date date"
         "temp temp"
         "weather weather"
         "wind humidity";
-    gap: 20px;
     list-style-type: none;
     padding: 0 40px;
 }
@@ -134,10 +134,11 @@ body {
 
 .city { grid-area: city; font-size: 24px; }
 .date { grid-area: date; font-size: 24px; margin-left: 75px; color: rgba(176, 156, 217, 0.6) !important;  }
-.temp span { grid-area: temp; font-size: 64px; }
+.temp span { grid-area: temp; font-size: 128px; }
 .temp p { 
-    font-size: 32px;
-    align-self: flex-start;
+    font-size: 64px;
+    margin-top: 10px;
+    /* align-self: flex-start; */
 }
 .weather-code { grid-area: weather; font-size: 32px; }
 .wind-speed { grid-area: wind; font-size: 20px; }

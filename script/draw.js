@@ -5,6 +5,9 @@ const ctx = canvas.getContext('2d');
 const numberOfDrops = [50, 100, 200];
 let drops = []
 
+const numberOfClouds = [5, 10, 20];
+let clouds = [];
+
 function initRain(weathercode) {
     const rainCodesLow = [51, 56, 61, 66, 80];
     const rainCodesMedium = [53, 63, 81];
@@ -36,6 +39,37 @@ function initRain(weathercode) {
     }
 }
 
+function initCloudes(weathercode) {
+    const cloudCodesLow = [1, 61, 66, 80, 95];
+    const cloudCodesMedium = [2, 63, 81, 96];
+    const cloudCodesHigh = [3, 57, 65, 67, 82, 99];
+
+    if (cloudCodesLow.includes(weathercode)) {
+        clouds = Array.from( {length: numberOfClouds[0]}, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 3 + 1,
+            speed: Math.random() * 3 + 2
+        }));
+    }
+    if (cloudCodesMedium.includes(weathercode)) {
+        clouds = Array.from( {length: numberOfClouds[1]}, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 4 + 2,
+            speed: Math.random() * 5 + 3
+        }));
+    }
+    if (cloudCodesHigh.includes(weathercode)) {
+        clouds = Array.from( {length: numberOfClouds[2]}, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 5 + 3,
+            speed: Math.random() * 8 + 5
+        }));
+    }
+}
+
 function resize() {
     const rect = mainCard.getBoundingClientRect();
     canvas.width = rect.width;
@@ -46,6 +80,12 @@ window.addEventListener('resize', resize);
 
 
 function draw() {
+    drawRain();
+
+    requestAnimationFrame(draw);
+}
+
+function drawRain() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     drops.forEach(drop => {
@@ -68,8 +108,31 @@ function draw() {
         ctx.fillStyle = 'rgba(4, 81, 247, 0.5)';
         ctx.fill();
     });
+}
 
-    requestAnimationFrame(draw);
+function drawClouds() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    clouds.forEach(drop => {
+        drop.x += drop.speed;
+
+        if (drop.x > canvas.height) {
+            drop.x = -drop.radius;
+            drop.y = Math.random() * canvas.width;
+        }
+
+        ctx.beginPath();
+        ctx.arc(
+            drop.x,
+            drop.y,
+            drop.radius,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle = 'rgba(4, 81, 247, 0.5)';
+        ctx.fill();
+    });
 }
 
 draw()

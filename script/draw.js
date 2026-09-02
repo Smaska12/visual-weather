@@ -13,30 +13,31 @@ function initRain(weathercode) {
     const rainCodesMedium = [53, 63, 81];
     const rainCodesHigh = [55, 57, 65, 67];
 
+    let count = 0;
+    let radiusRange = [1, 3];
+    let speedRange = [2, 3];
+
     if (rainCodesLow.includes(weathercode)) {
-        drops = Array.from( {length: numberOfDrops[0]}, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            radius: Math.random() * 3 + 1,
-            speed: Math.random() * 3 + 2
-        }));
+        count = numberOfDrops[0];
+        radiusRange = [1, 3];
+        speedRange = [2, 3];
     }
     if (rainCodesMedium.includes(weathercode)) {
-        drops = Array.from( {length: numberOfDrops[1]}, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            radius: Math.random() * 4 + 2,
-            speed: Math.random() * 5 + 3
-        }));
+        count = numberOfDrops[1];
+        radiusRange = [2, 4];
+        speedRange = [3, 5];
     }
     if (rainCodesHigh.includes(weathercode)) {
-        drops = Array.from( {length: numberOfDrops[2]}, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            radius: Math.random() * 5 + 3,
-            speed: Math.random() * 8 + 5
-        }));
+        count = numberOfDrops[2];
+        radiusRange = [3, 5];
+        speedRange = [5, 8];
     }
+    drops = Array.from( {length: count}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * (radiusRange[1] - radiusRange[0]) + radiusRange[0],
+        speed: Math.random() * (speedRange[1] - speedRange[0]) + speedRange[0]
+    }));
 }
 
 function initClouds(weathercode) {
@@ -76,8 +77,8 @@ window.addEventListener('resize', resize);
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawRain();
     drawClouds();
+    drawRain();
 
     requestAnimationFrame(draw);
 }
@@ -111,7 +112,7 @@ function drawClouds() {
 
         if (cloud.x > canvas.width + cloud.width) {
             cloud.x = -cloud.width;
-            cloud.y = Math.random() * canvas.height;
+            cloud.y = Math.random() * canvas.height * 0.35;
         }
 
         ctx.fillStyle = `rgba(255, 255, 255, ${cloud.opacity})`;

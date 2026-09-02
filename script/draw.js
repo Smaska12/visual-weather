@@ -10,6 +10,9 @@ let clouds = [];
 
 let sun = null;
 
+const numberOfFog = [20, 30];
+let fog = [];
+
 function initRain(weathercode) {
     const rainCodesLow = [51, 56, 61, 66, 80];
     const rainCodesMedium = [53, 63, 81];
@@ -97,6 +100,28 @@ function initSun(weathercode) {
     sun = null;
 }
 
+function initFog(weathercode) {
+    const fogCodesLow = [45]
+    const fogCodesHigh = [48]
+
+    let count = 0;
+
+    if (fogCodesLow.includes(weathercode)) {
+        count = numberOfFog[0];
+    }
+    if (fogCodesHigh.includes(weathercode)) {
+        count = numberOfFog[1];
+    }
+    fog = Array.from( {length: count}, () => ({
+        x: Math.random() * canvas.width,
+        y: canvas.height * (0.4 + Math.random() * 0.5),
+        width: Math.random() * 200 + 150,
+        height: Math.random() * 40 + 40,
+        speed: Math.random() * 0.2 + 0.1,
+        opacity: Math.random() * 0.1 + 0.05
+    }))
+}
+
 function resize() {
     const rect = mainCard.getBoundingClientRect();
     canvas.width = rect.width;
@@ -112,6 +137,7 @@ function draw() {
     drawSun();
     drawClouds();
     drawRain();
+    drawFog();
 
     requestAnimationFrame(draw);
 }
@@ -228,6 +254,29 @@ function drawSun() {
     ctx.fill();
  
     ctx.restore();
+}
+
+function drawFog() {
+    fog.forEach(patch => {
+        patch.x += patch.speed;
+
+        if (patch.x > canvas.width + patch.width) {
+            patch.x = -patch.width;
+            patch.y = canvas.height * (0.4 + Math.random() * 0.5);
+        }
+
+        ctx.fillStyle = `rgba(255, 255, 255, ${patch.opacity})`;
+        ctx.beginPath();
+        ctx.roundRect(
+            patch.x,
+            patch.y + 20,
+            patch.width,
+            100,
+            15
+        );
+
+        ctx.fill();
+    });
 }
 
 draw()

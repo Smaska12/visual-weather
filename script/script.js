@@ -158,6 +158,7 @@ async function getCurrentTemp(latitude, longitude) {
             initRain(currentweatherCode);
             initClouds(currentweatherCode);
             initSun(currentweatherCode);
+            initFog(currentweatherCode);
 
             const hour = parseInt(currentDate.slice(11, 13), 10);
             const timeOfDay = getTimeOfDay(hour);

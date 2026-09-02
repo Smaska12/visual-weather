@@ -246,3 +246,20 @@ btnSearch.addEventListener('click', async () => {
     loader.classList.add('hidden');
     content.classList.add('loaded');
 })
+
+cityName.addEventListener('keydown', async (event) => {
+    if (event.key === 'Enter') {
+        event.link = false;
+
+        const loader = document.getElementById('loader');
+        const content = document.getElementById('content');
+
+        loader.classList.remove('hidden');
+        content.classList.remove('loaded');
+
+        await searchCity(cityName.value);
+
+        loader.classList.add('hidden');
+        content.classList.add('loaded');
+    }
+})

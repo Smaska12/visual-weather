@@ -8,6 +8,8 @@ let drops = []
 const numberOfClouds = [5, 10, 20];
 let clouds = [];
 
+let sun = null;
+
 function initRain(weathercode) {
     const rainCodesLow = [51, 56, 61, 66, 80];
     const rainCodesMedium = [53, 63, 81];
@@ -64,6 +66,10 @@ function initClouds(weathercode) {
         speed: Math.random() * 0.3 + 0.1,
         opacity: Math.random() * 0.3 + 0.4
     }));
+}
+
+function initSun(weathercode) {
+
 }
 
 function resize() {
@@ -150,6 +156,10 @@ function drawClouds() {
         ctx.fill();
         
     });
+}
+
+function drawSun() {
+    
 }
 
 draw()

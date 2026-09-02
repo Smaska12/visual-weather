@@ -143,6 +143,12 @@ body {
         transparent 100%
     );
 }
+body[data-time="morning"] {
+    background: rgba(26, 10, 46, 0.8);
+}
+body[data-time="morning"] .day-status svg {
+    stroke: rgba(210, 160, 120, 0.9);
+}
 
 [data-time="day"] .bg-area {
     --bg-gradient: linear-gradient(to right, 
@@ -151,6 +157,12 @@ body {
         rgba(42, 74, 138, 0.3) 60%, 
         transparent 100%
     );
+}
+body[data-time="day"] {
+    background-color: rgba(12, 20, 69, 0.8)
+}
+body[data-time="day"] .day-status svg {
+    stroke: rgba(140, 180, 200, 0.9);
 }
 
 [data-time="evening"] .bg-area {
@@ -161,6 +173,12 @@ body {
         transparent 100%
     );
 }
+body[data-time="evening"] {
+    background-color: rgba(45, 10, 10, 0.8)
+}
+body[data-time="evening"] .day-status svg {
+    stroke: rgba(200, 120, 130, 0.9);
+}
 
 [data-time="night"] .bg-area {
     --bg-gradient: linear-gradient(to right, 
@@ -170,6 +188,13 @@ body {
         transparent 100%
     );
 }
+body[data-time="night"] {
+    background-color: rgba(2, 2, 16, 0.8)
+}
+body[data-time="night"] .day-status svg {
+    stroke: rgba(150, 150, 210, 0.9);
+}
+
 
 .search-result-bar {
     position: absolute;
@@ -231,33 +256,7 @@ body {
 .list-info li:nth-child(4) svg { stroke: rgba(68, 215, 255, 0.5); }
 .list-info li:nth-child(5) svg { stroke: rgba(255, 68, 68, 0.5); }
 
-body[data-time="morning"] {
-    background-color: rgba(120, 90, 70, 0.35);
-}
-body[data-time="morning"] .day-status svg {
-    stroke: rgba(210, 160, 120, 0.9);
-}
 
-body[data-time="day"] {
-    background-color: rgba(60, 90, 110, 0.35);
-}
-body[data-time="day"] .day-status svg {
-    stroke: rgba(140, 180, 200, 0.9);
-}
-
-body[data-time="evening"] {
-    background-color: rgba(110, 60, 70, 0.35);
-}
-body[data-time="evening"] .day-status svg {
-    stroke: rgba(200, 120, 130, 0.9);
-}
-
-body[data-time="night"] {
-    background-color: rgba(45, 45, 80, 0.4);
-}
-body[data-time="night"] .day-status svg {
-    stroke: rgba(150, 150, 210, 0.9);
-}
 
 .content {
     opacity: 0;

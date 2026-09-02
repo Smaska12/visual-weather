@@ -69,7 +69,32 @@ function initClouds(weathercode) {
 }
 
 function initSun(weathercode) {
+    const sunCodesFull = [0];
+    const sunCodesPartial = [1];
 
+    if (sunCodesFull.includes(weathercode)) {
+        sun = {
+            x: canvas.width * 0.5,
+            y: canvas.height * 0.2,
+            radius: 100,
+            opacity: 1,
+            angle: 0
+        };
+        return;
+    }
+
+    if (sunCodesPartial.includes(weathercode)) {
+        sun = {
+            x: canvas.width * 0.5,
+            y: canvas.height * 0.2,
+            radius: 100,
+            opacity: 0.7,
+            angle: 0
+        };
+        return;
+    }
+
+    sun = null;
 }
 
 function resize() {
@@ -83,6 +108,8 @@ window.addEventListener('resize', resize);
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    drawSun();
     drawClouds();
     drawRain();
 
@@ -159,7 +186,48 @@ function drawClouds() {
 }
 
 function drawSun() {
-    
+    if (!sun) return;
+ 
+    sun.angle += 0.001;
+ 
+    ctx.save();
+
+    const glow = ctx.createRadialGradient(
+        sun.x, sun.y, sun.radius * 0.3,
+        sun.x, sun.y, sun.radius * 2.2
+    );
+    glow.addColorStop(0, `rgba(255, 214, 102, ${sun.opacity * 0.5})`);
+    glow.addColorStop(1, 'rgba(255, 214, 102, 0)');
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(sun.x, sun.y, sun.radius * 2.2, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = `rgba(255, 214, 102, ${sun.opacity * 0.6})`;
+    ctx.lineWidth = 3;
+    const rayCount = 8;
+    for (let i = 0; i < rayCount; i++) {
+        const rayAngle = sun.angle + (i / rayCount) * Math.PI * 2;
+        const innerR = sun.radius * 1.5;
+        const outerR = sun.radius * 2.5;
+        ctx.beginPath();
+        ctx.moveTo(
+            sun.x + Math.cos(rayAngle) * innerR,
+            sun.y + Math.sin(rayAngle) * innerR
+        );
+        ctx.lineTo(
+            sun.x + Math.cos(rayAngle) * outerR,
+            sun.y + Math.sin(rayAngle) * outerR
+        );
+        ctx.stroke();
+    }
+
+    ctx.fillStyle = `rgba(255, 224, 130, ${sun.opacity})`;
+    ctx.beginPath();
+    ctx.arc(sun.x, sun.y, sun.radius, 0, Math.PI * 2);
+    ctx.fill();
+ 
+    ctx.restore();
 }
 
 draw()

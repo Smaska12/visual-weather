@@ -13,6 +13,9 @@ let sun = null;
 const numberOfFog = [20, 30];
 let fog = [];
 
+const numberOfSnow = [50, 100, 150];
+let snows = [];
+
 function initRain(weathercode) {
     const rainCodesLow = [51, 56, 61, 66, 80];
     const rainCodesMedium = [53, 63, 81];
@@ -122,6 +125,40 @@ function initFog(weathercode) {
     }))
 }
 
+function initSnow(weathercode) {
+    const snowCodesLow = [71, 85];
+    const snowCodesMedium = [73];
+    const snowCodesHigh = [75, 77, 86];
+
+    let count = 0;
+    let radiusRange = [1, 3];
+    let speedRange = [1, 2];
+
+    if (snowCodesLow.includes(weathercode)) {
+        count = numberOfSnow[0];
+        radiusRange = [1, 3];
+        speedRange = [1, 2];
+    }
+    if (snowCodesMedium.includes(weathercode)) {
+        count = numberOfSnow[1];
+        radiusRange = [2, 4];
+        speedRange = [2, 3];
+    }
+    if (snowCodesHigh.includes(weathercode)) {
+        count = numberOfSnow[2];
+        radiusRange = [3, 5];
+        speedRange = [3, 4];
+    }
+    snows = Array.from( {length: count}, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * (radiusRange[1] - radiusRange[0]) + radiusRange[0],
+        speed: Math.random() * (speedRange[1] - speedRange[0]) + speedRange[0],
+        opacity: Math.random() * 0.5 + 0.1,
+        angle: (Math.random() * 30 - 15) * Math.PI / 180
+    }));
+}
+
 function resize() {
     const rect = mainCard.getBoundingClientRect();
     canvas.width = rect.width;
@@ -138,6 +175,7 @@ function draw() {
     drawClouds();
     drawRain();
     drawFog();
+    drawSnow();
 
     requestAnimationFrame(draw);
 }
@@ -275,6 +313,30 @@ function drawFog() {
             15
         );
 
+        ctx.fill();
+    });
+}
+
+function drawSnow() {
+    snows.forEach(snow => {
+        snow.x += Math.sin(snow.angle) * snow.speed;
+        snow.y += Math.cos(snow.angle) * snow.speed;
+
+        if (snow.y > canvas.height) {
+            snow.y = -snow.radius;
+            snow.x = Math.random() * canvas.width;
+        }
+
+        ctx.beginPath();
+        ctx.arc(
+            snow.x,
+            snow.y,
+            snow.radius,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle = `rgba(253, 253, 253, ${snow.opacity})`;
         ctx.fill();
     });
 }

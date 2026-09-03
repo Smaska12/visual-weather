@@ -160,6 +160,7 @@ async function getCurrentTemp(latitude, longitude) {
             initSun(currentweatherCode);
             initFog(currentweatherCode);
             initSnow(currentweatherCode);
+            initThunderstorm(currentweatherCode);
 
             const hour = parseInt(currentDate.slice(11, 13), 10);
             const timeOfDay = getTimeOfDay(hour);
@@ -231,7 +232,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const loader = document.getElementById('loader');
     const content = document.getElementById('content');
 
-    await searchCity('ОАЭ');
+    await searchCity('Москва');
 
     loader.classList.add('hidden');
     content.classList.add('loaded');

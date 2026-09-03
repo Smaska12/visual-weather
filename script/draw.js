@@ -9,6 +9,7 @@ const numberOfClouds = [5, 10, 20];
 let clouds = [];
 
 let sun = null;
+let thunderstorm = null;
 
 const numberOfFog = [20, 30];
 let fog = [];
@@ -157,6 +158,25 @@ function initSnow(weathercode) {
         opacity: Math.random() * 0.5 + 0.1,
         angle: (Math.random() * 30 - 15) * Math.PI / 180
     }));
+}
+
+function initThunderstorm(weathercode) {
+    const thunderstormCodes = [95, 96, 99];
+
+    let intervalRange;
+
+    if (weathercode === thunderstormCodes[0]) {
+        intervalRange = [7000, 12000];
+    }
+    if (weathercode === thunderstormCodes[1]) {
+        intervalRange = [5000, 9000];
+    }
+    if (weathercode === thunderstormCodes[2]) {
+        intervalRange = [3000, 6000];
+    }
+    thunderstorm = {
+        
+    }
 }
 
 function resize() {
@@ -339,6 +359,10 @@ function drawSnow() {
         ctx.fillStyle = `rgba(253, 253, 253, ${snow.opacity})`;
         ctx.fill();
     });
+}
+
+function drawThunderstorm() {
+    
 }
 
 draw()

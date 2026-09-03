@@ -163,20 +163,26 @@ function initSnow(weathercode) {
 function initThunderstorm(weathercode) {
     const thunderstormCodes = [95, 96, 99];
 
-    let intervalRange;
+    if (!thunderstormCodes.includes(weathercode)) {
+        thunderstorm = null;
+        return
+    }
 
-    if (weathercode === thunderstormCodes[0]) {
-        intervalRange = [7000, 12000];
-    }
-    if (weathercode === thunderstormCodes[1]) {
-        intervalRange = [5000, 9000];
-    }
-    if (weathercode === thunderstormCodes[2]) {
-        intervalRange = [3000, 6000];
-    }
+    let intervalRange = [7000, 12000];
+
+    if (weathercode === 95) intervalRange = [7000, 12000];
+    if (weathercode === 96) intervalRange = [5000, 9000];
+    if (weathercode === 99) intervalRange = [3000, 6000];
     thunderstorm = {
-        
-    }
+        intervalRange,
+        nextFlashAt: performance.now() + randomBetween(intervalRange[0], intervalRange[1]),
+        flashOpacity: 0,
+        bolt: null,
+        boltVisibleUntil: 0
+    };
+}
+function randomBetween(min, max) {
+    return Math.random() * (max - min) + min;
 }
 
 function resize() {
@@ -196,6 +202,7 @@ function draw() {
     drawRain();
     drawFog();
     drawSnow();
+    drawThunderstorm();
 
     requestAnimationFrame(draw);
 }
@@ -362,7 +369,70 @@ function drawSnow() {
 }
 
 function drawThunderstorm() {
-    
+    if (!thunderstorm) return;
+
+    const now = performance.now();
+
+    if (now >= thunderstorm.nextFlashAt) {
+        thunderstorm.flashOpacity = 1;
+        thunderstorm.bolt = generateLightningBolt();
+        thunderstorm.boltVisibleUntil = now + 150;
+
+        thunderstorm.nextFlashAt = now + randomBetween(
+            thunderstorm.intervalRange[0],
+            thunderstorm.intervalRange[1]
+        );
+    }
+
+    if (thunderstorm.flashOpacity > 0) {
+        ctx.save();
+        ctx.fillStyle = `rgba(255, 255, 255, ${thunderstorm.flashOpacity * 0.3})`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+
+        thunderstorm.flashOpacity -= 0.04;
+        if (thunderstorm.flashOpacity < 0) thunderstorm.flashOpacity = 0;
+    }
+
+    if (thunderstorm.bolt && now < thunderstorm.boltVisibleUntil) {
+        drawLightningBolt(thunderstorm.bolt);
+    } else {
+        thunderstorm.bolt = null;
+    }
+}
+
+function generateLightningBolt() {
+    const startX = Math.random() * canvas.width;
+    const targetY = canvas.height * (0.5 + Math.random() * 0.4);
+    const segments = 8;
+
+    const points = [{ x: startX, y: 0 }];
+    let x = startX;
+    let y = 0;
+
+    for (let i = 0; i < segments; i++) {
+        x += (Math.random() - 0.5) * 60;
+        y += targetY / segments;
+        points.push({ x, y });
+    }
+
+    return points;
+}
+
+function drawLightningBolt(points) {
+    ctx.save();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.lineWidth = 3;
+    ctx.shadowColor = 'rgba(180, 200, 255, 0.8)';
+    ctx.shadowBlur = 15;
+
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+    for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+    }
+    ctx.stroke();
+    ctx.restore();
 }
 
 draw()

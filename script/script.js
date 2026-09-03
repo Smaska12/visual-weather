@@ -249,6 +249,7 @@ btnSearch.addEventListener('click', async () => {
 
     loader.classList.add('hidden');
     content.classList.add('loaded');
+    setRandomBackground();
 })
 
 cityName.addEventListener('keydown', async (event) => {
@@ -265,5 +266,6 @@ cityName.addEventListener('keydown', async (event) => {
 
         loader.classList.add('hidden');
         content.classList.add('loaded');
+        setRandomBackground();
     }
 })

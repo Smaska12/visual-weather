@@ -441,9 +441,42 @@ body[data-time="night"] .day-status svg {
         margin: 0;
     }
 }
-@media (max-height: 767px) {
+@media (max-height: 768px) {
     .main-card {
+        width: 100vw;
         height: 100vh;
         margin: 0;
     }
+    .list-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        top: auto;
+        width: calc(100% - 50px);
+        height: 50%;
+        transform: none;
+        align-content: center;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 100px 50px 30px;
+        grid-template-areas: 
+            "city temp temp day"
+            "date weather weather humidity"
+            ". . . wind";
+    }
+    .search-bar {
+        height: 10%;
+    }
+    .city { font-size: 14px; }
+    .city span { font-size: 24px; }
+    .city svg { width: 32px; height: 32px; }
+
+    .date { font-size: 12px; margin-left: 45px; }
+
+    .temp span { font-size: 56px; }
+    .temp p { font-size: 20px; margin-top: 5px; }
+
+    .weather-code { font-size: 14px; }
+    .day-status { font-size: 14px; }
+    .wind-speed, .humidity { font-size: 12px; }
 }

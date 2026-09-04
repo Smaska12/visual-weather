@@ -154,6 +154,7 @@ async function getCurrentTemp(latitude, longitude) {
             const currentHumidity = humidity[index];
             const currentweatherCode = weatherCode[index];
             const textByWeatherCode = getWeatherStatusByCode(currentweatherCode);
+            const shortTextByWeatherCode = shortWeatherName(currentweatherCode);
 
             initRain(currentweatherCode);
             initClouds(currentweatherCode);
@@ -174,7 +175,7 @@ async function getCurrentTemp(latitude, longitude) {
             windSpeedArea.textContent = `${currentWindSpeed.toFixed(2)} м/с`;
             humidityArea.textContent = `${currentHumidity} %`;
             dayStatusArea.textContent = `${timeOfDay}`;
-            weatherCodeArea.textContent = `${textByWeatherCode}`;
+            weatherCodeArea.textContent = `${shortTextByWeatherCode}`;
 
             console.log(`Сейчас ${displayTime} (по времени города) → ${currentTemp}°C`);
             return currentTemp;
@@ -269,3 +270,38 @@ cityName.addEventListener('keydown', async (event) => {
         setRandomBackground();
     }
 })
+
+function shortWeatherName(name) {
+    const names = {
+        0: "Ясно",
+        1: "Преим. ясно",
+        2: "Облачно",
+        3: "Пасмурно",
+        45: "Туман",
+        48: "Изморозь",
+        51: "Морось",
+        53: "Морось",
+        55: "Морось",
+        56: "Лед. морось",
+        57: "Лед. морось",
+        61: "Дождь",
+        63: "Дождь",
+        65: "Сильн. дождь",
+        66: "Лед. дождь",
+        67: "Лед. дождь",
+        71: "Снег",
+        73: "Снег",
+        75: "Сильн. снег",
+        77: "Снеж. крупа",
+        80: "Ливень",
+        81: "Ливень",
+        82: "Сильн. ливень",
+        85: "Снегопад",
+        86: "Сильн. снегопад",
+        95: "Гроза",
+        96: "Гроза с градом",
+        99: "Сильная гроза с градом"
+    };
+
+    return names[name] || name;
+}

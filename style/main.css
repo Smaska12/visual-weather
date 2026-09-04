@@ -441,3 +441,9 @@ body[data-time="night"] .day-status svg {
         margin: 0;
     }
 }
+@media (max-height: 767px) {
+    .main-card {
+        height: 100vh;
+        margin: 0;
+    }
+}
